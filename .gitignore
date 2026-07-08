@@ -1,0 +1,6 @@
+*.retry
+.vault_pass
+homelab_key
+homelab_key.pub
+*.pem
+.env
