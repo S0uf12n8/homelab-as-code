@@ -1,58 +1,106 @@
-\# Homelab-as-Code
+# Homelab-as-Code
 
+> A production-inspired homelab built with Infrastructure as Code to learn and demonstrate modern DevOps practices.
 
+## Project Goal
 
-A single Git repository that provisions a small production-like platform from zero — hardened Linux, containers, a k3s cluster managed by GitOps, full observability, and a network security monitoring pipeline (Suricata → Loki → Grafana) as the distinctive workload.
+This repository documents my journey from Linux system administration to a fully automated infrastructure platform.
 
+The objective is to provision and manage servers entirely through code, gradually evolving into a production-like environment featuring:
 
+- Linux hardening with Ansible
+- Containerized workloads with Docker
+- Kubernetes (k3s)
+- GitOps with Argo CD
+- Observability with Prometheus, Grafana and Loki
+- Network security monitoring with Suricata
+- CI/CD with GitHub Actions
 
-Nothing is done by hand. If it's not in Git, it doesn't exist.
+Every change is version-controlled. If it's not in Git, it doesn't exist.
 
+---
 
+## Current Status
 
-\## Status
+### ✅ Completed
 
+- Oracle Cloud Free Tier environment
+- SSH key authentication
+- Initial Ansible project structure
+- Base package installation
+- Time synchronization (Chrony)
+- Linux user management
 
+### 🚧 In Progress
 
-\*\*Phase 0 — Setup \& prerequisites\*\* (in progress)
+- SSH key deployment with Ansible
+- Linux hardening
 
+---
 
+## Target Architecture
 
-\- \[x] SSH key generated, 2 Oracle Cloud ARM nodes provisioned (node1, node2)
+```
+GitHub
+   │
+Ansible
+   │
+┌───────────────┐
+│ Oracle Cloud  │
+├──────┬────────┤
+│Node 1│Node 2  │
+└──┬───┴───┬────┘
+   │       │
+ Docker / k3s
+      │
+   Argo CD
+      │
+Prometheus + Loki + Grafana
+      │
+ Suricata IDS
+```
 
-\- \[x] SSH access confirmed to both nodes
+---
 
-\- \[ ] Repo public on GitHub
+## Repository Structure
 
-\- \[ ] Phase 1 — Ansible hardening
+```
+inventory/
+playbooks/
+docs/
+README.md
+```
 
+---
 
+## Roadmap
 
-\## Architecture (target)
+- [x] Phase 0 — Environment setup
+- [ ] Phase 1 — Linux hardening with Ansible
+- [ ] Phase 2 — Docker & k3s
+- [ ] Phase 3 — GitOps
+- [ ] Phase 4 — Observability
+- [ ] Phase 5 — Security monitoring
+- [ ] Phase 6 — CI/CD
 
+---
 
+## Technologies
 
-\- 2× Oracle Cloud Ampere A1 ARM instances (Always Free tier), Ubuntu 24.04
+- Ubuntu Server
+- Oracle Cloud
+- Ansible
+- Docker
+- Kubernetes (k3s)
+- Argo CD
+- Prometheus
+- Grafana
+- Loki
+- Suricata
+- GitHub Actions
 
-\- Ansible for configuration management (Phase 1)
+---
 
-\- k3s + Argo CD for orchestration/GitOps (Phase 2)
+## Philosophy
 
-\- Prometheus, Grafana, Loki for observability (Phase 3)
-
-\- Suricata IDS pipeline feeding Loki/Grafana as the security-monitoring differentiator (Phase 3)
-
-\- GitHub Actions for CI/CD (Phase 4)
-
-
-
-Full roadmap: see project notes (not yet published here).
-
-
-
-\## Why this project
-
-
-
-Most junior DevOps candidates come from dev backgrounds and are weak on networking. This project inverts that — it demonstrates infrastructure automation, orchestration, and observability skills on top of an existing networking background, differentiated by a real intrusion-detection pipeline rather than a generic app deployment.
-
+This project is focused on learning engineering practices rather than simply deploying software. Every component is built incrementally, documented, reproducible, and managed as Infrastructure as Code.
