@@ -1,0 +1,17 @@
+---
+- name: User Management
+  hosts: node2
+  become: true
+
+  tasks:
+    - name: Add new user
+      ansible.builtin.user:
+        name: admin
+        groups: sudo
+        append: true
+        shell: /bin/bash
+        home: /home/admin
+        comment: "Dev admin"
+        uid: 67
+        state: present
+        create_home: true
