@@ -1,0 +1,32 @@
+---
+- name: Install base packages and configure time synchronization
+  hosts: homelab
+  become: true
+
+  tasks:
+
+    - name: Install required packages
+      apt:
+        name:
+          - curl
+          - git
+          - vim
+          - unzip
+          - ca-certificates
+          - gnupg
+          - chrony
+        state: present
+        update_cache: true
+
+    - name: Ensure Chrony service is running and enabled
+      systemd:
+        name: chrony
+        state: started
+        enabled: true
+
+    - name: Stop and disable systemd-timesyncd
+      systemd:
+        name: systemd-timesyncd
+        state: stopped
+        enabled: false
+...

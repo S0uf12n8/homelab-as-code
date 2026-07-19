@@ -1,0 +1,13 @@
+---
+- name: User Management
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Add user souf
+      ansible.builtin.user:
+        name: souf
+        groups: sudo
+        shell: /bin/bash
+        state: present
+        create_home: true
