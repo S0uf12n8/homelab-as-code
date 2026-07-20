@@ -4,3 +4,19 @@ homelab_key
 homelab_key.pub
 *.pem
 .env
+# Python
+ansible-env/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# VS Code
+.vscode/
+
+# Linux
+*.swp
+*~
+
+# macOS
+.DS_Store
