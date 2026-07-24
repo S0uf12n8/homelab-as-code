@@ -33,9 +33,10 @@ Every change is version-controlled. If it's not in Git, it doesn't exist.
 
 ### 🚧 In Progress
 
-- SSH key deployment with Ansible
-- Linux hardening
-
+- SSH key management
+- SSH hardening
+- Firewall configuration
+- Fail2Ban
 ---
 
 ## Target Architecture
@@ -65,10 +66,12 @@ Prometheus + Loki + Grafana
 ## Repository Structure
 
 ```
-inventory/
-playbooks/
-docs/
-README.md
+homelab-as-code/
+├── docs/
+├── inventory/
+├── playbooks/
+├── ansible.cfg
+└── README.md
 ```
 
 ---
@@ -104,3 +107,4 @@ README.md
 ## Philosophy
 
 This project is focused on learning engineering practices rather than simply deploying software. Every component is built incrementally, documented, reproducible, and managed as Infrastructure as Code.
+Manual configuration is avoided whenever possible to ensure the infrastructure remains reproducible
