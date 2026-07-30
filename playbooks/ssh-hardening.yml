@@ -1,0 +1,19 @@
+---
+- name: Disable password authentication 
+  hosts: all
+  become: true
+-  tasks:
+      - name: hardening deploy acount
+         path: /etc/ssh/sshd_config
+         regexp: '^#?\s*PermitRootLogin'
+         line: 'PermitRootLogin no'
+         state: present
+         validate: /usr/sbin/sshd -t -f %s
+         backup: true 
+         notify: restart sshd
+- handlers:
+    - name: restart sshd
+        ansible.builtin.service:
+          name: sshd
+          state: restarted
+
