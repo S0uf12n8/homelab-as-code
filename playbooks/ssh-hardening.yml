@@ -1,19 +1,25 @@
 ---
-- name: Disable password authentication 
+- name: SSH Hardening
   hosts: all
   become: true
--  tasks:
-      - name: hardening deploy acount
-         path: /etc/ssh/sshd_config
-         regexp: '^#?\s*PermitRootLogin'
-         line: 'PermitRootLogin no'
-         state: present
-         validate: /usr/sbin/sshd -t -f %s
-         backup: true 
-         notify: restart sshd
-- handlers:
-    - name: restart sshd
-        ansible.builtin.service:
-          name: sshd
-          state: restarted
 
+  tasks:
+    - name: Deploy SSH hardening configuration
+      ansible.builtin.copy:
+        dest: /etc/ssh/sshd_config.d/99-hardening.conf
+        owner: root
+        group: root
+        mode: "0644"
+        backup: true
+        validate: /usr/sbin/sshd -t -f %s
+        content: |
+          PasswordAuthentication no
+          PermitRootLogin no
+          PubkeyAuthentication yes
+      notify: Reload SSH
+
+  handlers:
+    - name: Reload SSH
+      ansible.builtin.service:
+        name: ssh
+        state: reloaded
