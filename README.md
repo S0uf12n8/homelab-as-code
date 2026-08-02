@@ -87,7 +87,7 @@ homelab-as-code/
 ## Roadmap
 
 - [x] Phase 0 — Environment setup
-- [ ] Phase 1 — Linux hardening with Ansible
+- [x] Phase 1 — Linux hardening with Ansible
 - [ ] Phase 2 — Docker & k3s
 - [ ] Phase 3 — GitOps
 - [ ] Phase 4 — Observability
