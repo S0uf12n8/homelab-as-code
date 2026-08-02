@@ -30,12 +30,12 @@ Every change is version-controlled. If it's not in Git, it doesn't exist.
 - Base package installation
 - Time synchronization (Chrony)
 - Linux user management
-
-### 🚧 In Progress
-
 - SSH key management
 - SSH hardening
 - Firewall configuration
+
+### 🚧 In Progress
+
 - Fail2Ban
 ---
 
