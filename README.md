@@ -22,21 +22,29 @@ Every change is version-controlled. If it's not in Git, it doesn't exist.
 
 ## Current Status
 
-### ✅ Completed
+### ✅ Phase 0 – Environment Setup
 
-- Oracle Cloud Free Tier environment
-- SSH key authentication
-- Initial Ansible project structure
-- Base package installation
-- Time synchronization (Chrony)
+Completed.
+
+### ✅ Phase 1 – Linux Hardening
+
+Completed.
+
+Implemented:
+
+- Base packages
+- Chrony time synchronization
 - Linux user management
-- SSH key management
+- SSH public key deployment
+- Passwordless sudo
 - SSH hardening
-- Firewall configuration
+- UFW firewall
+- Automatic security updates
+- Fail2Ban protection
 
-### 🚧 In Progress
+### 🚧 Phase 2 – Docker Platform
 
-- Fail2Ban
+Next milestone.
 ---
 
 ## Target Architecture
