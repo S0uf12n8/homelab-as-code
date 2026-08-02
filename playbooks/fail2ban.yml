@@ -1,0 +1,31 @@
+---
+- name: Install and configure Fail2ban
+  hosts: homelab
+  become: true
+
+  tasks:
+    - name: Install fail2ban
+      ansible.builtin.apt: 
+        name: fail2ban
+        state: present
+        update_cache: true
+    - name: Deploy fail2ban configuration
+      ansible.builtin.template:
+        src: ../templates/jail.local.j2
+        dest: /etc/fail2ban/jail.local
+        owner: root
+        group: root
+        mode: '0644'
+        backup: true
+      notify: Restart Fail2Ban
+
+    - name: Ensure the fail2ban is running and enabled
+      ansible.builtin.service:
+        name: fail2ban
+        state: started
+        enabled: true
+  handlers:
+    - name: Restart Fail2Ban
+      ansible.builtin.service:
+        name: fail2ban
+        state: restarted
