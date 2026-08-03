@@ -44,7 +44,8 @@ Implemented:
 
 ### 🚧 Phase 2 – Docker Platform
 
-Next milestone.
+- ✅ Docker Engine installation
+- 🚧 In Progress
 ---
 
 ## Target Architecture
