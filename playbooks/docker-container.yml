@@ -1,0 +1,14 @@
+---
+- name: Deploy Nginx Container
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Ensure nginx container is running
+      community.docker.docker_container:
+        name: nginx
+        image: nginx:latest
+        state: started
+        restart_policy: unless-stopped
+        published_ports:
+          - "80:80"
