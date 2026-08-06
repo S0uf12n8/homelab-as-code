@@ -1,0 +1,10 @@
+---
+- name: Create Docker volumes
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Ensure nginx data volume exists
+      community.docker.docker_volume:
+        name: nginx_data
+        state: present

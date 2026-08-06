@@ -1,0 +1,10 @@
+---
+- name: Create Docker network
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Ensure frontend network exists
+      community.docker.docker_network:
+        name: frontend
+        state: present
