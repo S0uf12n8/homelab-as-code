@@ -48,15 +48,17 @@ Completed:
 
 - Docker Engine installation
 - Docker user permissions
-- First container deployment (Nginx)
+- First container deployment
+- Docker volume management
+- Docker network management
 
 In Progress:
 
-- Container management
-- Docker networking
-- Docker volumes
+- Multi-container deployments
 - Docker Compose
 - Real service deployment
+- Reverse proxy
+- Monitoring stack
 ---
 
 ## Target Architecture
