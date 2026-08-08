@@ -1,0 +1,38 @@
+---
+- name: Deploy multi-container application
+  hosts: all
+  become: true
+
+  tasks:
+
+    - name: Ensure frontend network exists
+      community.docker.docker_network:
+        name: frontend
+        state: present
+
+    - name: Ensure nginx data volume exists
+      community.docker.docker_volume:
+        name: nginx_data
+        state: present
+
+    - name: Deploy whoami container
+      community.docker.docker_container:
+        name: whoami
+        image: traefik/whoami:latest
+        state: started
+        restart_policy: unless-stopped
+        networks:
+          - name: frontend
+
+    - name: Deploy nginx container
+      community.docker.docker_container:
+        name: nginx
+        image: nginx:latest
+        state: started
+        restart_policy: unless-stopped
+        published_ports:
+          - "8080:80"
+        volumes:
+          - "nginx_data:/usr/share/nginx/html"
+        networks:
+          - name: frontend
