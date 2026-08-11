@@ -1,0 +1,27 @@
+---
+- name: Deploy Docker Compose application
+  hosts: all
+  become: true
+
+  tasks:
+
+    - name: Create application directory
+      ansible.builtin.file:
+        path: /opt/homelab-app
+        state: directory
+        owner: root
+        group: root
+        mode: "0755"
+
+    - name: Deploy Compose configuration
+      ansible.builtin.copy:
+        src: ../../docker/compose.yml
+        dest: /opt/homelab-app/compose.yml
+        owner: root
+        group: root
+        mode: "0644"
+
+    - name: Deploy Compose application
+      community.docker.docker_compose_v2:
+        project_src: /opt/homelab-app
+        state: present
