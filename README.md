@@ -125,7 +125,19 @@ homelab-as-code/
 - GitHub Actions
 
 ---
+## Ansible Workflow
 
+The project follows an incremental Infrastructure-as-Code workflow:
+
+1. Provision and prepare the infrastructure.
+2. Establish SSH-based access.
+3. Configure systems using Ansible.
+4. Apply security hardening.
+5. Deploy and manage services.
+6. Document and verify changes.
+
+All infrastructure changes should be reproducible through Ansible whenever practical.
+---
 ## Philosophy
 
 This project is focused on learning engineering practices rather than simply deploying software. Every component is built incrementally, documented, reproducible, and managed as Infrastructure as Code.
