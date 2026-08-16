@@ -1,0 +1,30 @@
+services:
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    restart: unless-stopped
+
+    ports:
+      - "8080:80"
+
+    volumes:
+      - nginx_data:/usr/share/nginx/html
+
+    networks:
+      - frontend
+
+  whoami:
+    image: traefik/whoami:latest
+    container_name: whoami
+    restart: unless-stopped
+
+    networks:
+      - frontend
+
+volumes:
+  nginx_data:
+
+networks:
+  frontend:
+    driver: bridge
