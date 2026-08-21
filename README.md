@@ -105,7 +105,7 @@ homelab-as-code/
 
 - [x] Phase 0 — Environment setup
 - [x] Phase 1 — Linux hardening with Ansible
-- [ ] Phase 2 — Docker & k3s
+- [x] Phase 2 — Docker & k3s
 - [ ] Phase 3 — GitOps
 - [ ] Phase 4 — Observability
 - [ ] Phase 5 — Security monitoring
