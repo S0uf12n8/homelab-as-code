@@ -1,0 +1,26 @@
+---
+- name: Configure Docker container health check
+  hosts: all
+  become: true
+
+  tasks:
+
+    - name: Deploy application container with health check
+      community.docker.docker_container:
+        name: app
+        image: traefik/whoami:latest
+        state: started
+        restart_policy: unless-stopped
+        networks:
+          - name: proxy-lab
+        healthcheck:
+          test:
+            - CMD
+            - wget
+            - "--spider"
+            - "-q"
+            - "http://localhost:80"
+          interval: 30s
+          timeout: 5s
+          retries: 3
+          start_period: 5s
