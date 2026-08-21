@@ -24,4 +24,7 @@ jobs:
 
       - name: Check Ansible syntax
         run: |
-          ansible-playbook playbooks/docker/docker-healthcheck.yml --syntax-check
+          find playbooks -name "*.yml" -type f -print0 | while IFS= read -r -d '' playbook; do
+            echo "Checking: $playbook"
+            ansible-playbook "$playbook" --syntax-check || exit 1
+          done
