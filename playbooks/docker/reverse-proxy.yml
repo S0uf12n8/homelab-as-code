@@ -19,6 +19,22 @@
         networks:
           - name: proxy-lab
 
+    - name: Create Nginx configuration directory
+      ansible.builtin.file:
+        path: /opt/reverse-proxy
+        state: directory
+        owner: root
+        group: root
+        mode: "0755"
+
+    - name: Deploy Nginx configuration
+      ansible.builtin.template:
+        src: ../../templates/reverse-proxy.conf.j2
+        dest: /opt/reverse-proxy/default.conf
+        owner: root
+        group: root
+        mode: "0644"
+
     - name: Deploy Nginx reverse proxy
       community.docker.docker_container:
         name: reverse-proxy
@@ -29,3 +45,5 @@
           - "8081:80"
         networks:
           - name: proxy-lab
+        volumes:
+          - /opt/reverse-proxy/default.conf:/etc/nginx/conf.d/default.conf:ro
