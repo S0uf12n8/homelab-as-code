@@ -1,3 +1,4 @@
+---
 name: CI
 
 on:
@@ -17,7 +18,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Validate repository
+      - name: Install Ansible
         run: |
-          echo "Repository checkout successful"
-          echo "CI pipeline is working"
+          python3 -m pip install --user ansible
+
+      - name: Check Ansible syntax
+        run: |
+          ansible-playbook playbooks/docker/docker-healthcheck.yml --syntax-check
