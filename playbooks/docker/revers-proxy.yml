@@ -1,0 +1,31 @@
+---
+- name: Deploy Docker reverse proxy
+  hosts: all
+  become: true
+
+  tasks:
+
+    - name: Ensure proxy network exists
+      community.docker.docker_network:
+        name: proxy-lab
+        state: present
+
+    - name: Deploy application container
+      community.docker.docker_container:
+        name: app
+        image: traefik/whoami:latest
+        state: started
+        restart_policy: unless-stopped
+        networks:
+          - name: proxy-lab
+
+    - name: Deploy Nginx reverse proxy
+      community.docker.docker_container:
+        name: reverse-proxy
+        image: nginx:latest
+        state: started
+        restart_policy: unless-stopped
+        published_ports:
+          - "8081:80"
+        networks:
+          - name: proxy-lab
