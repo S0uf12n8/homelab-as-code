@@ -13,6 +13,10 @@ jobs:
   validate:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      packages: write
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -25,7 +29,6 @@ jobs:
         run: |
           python3 -m pip install --user ansible-lint
 
-
       - name: Check Ansible syntax
         run: |
           find playbooks -name "*.yml" -type f -print0 | while IFS= read -r -d '' playbook; do
@@ -33,14 +36,21 @@ jobs:
             ansible-playbook "$playbook" --syntax-check || exit 1
           done
 
+      - name: Run ansible-lint
+        run: |
+          ansible-lint
+
       - name: Build Docker image
         run: |
-          docker build -t homelab-ci-demo:latest ./docker/ci-demo
+          docker build -t ghcr.io/s0uf12n8/homelab-ci-demo:latest ./docker/ci-demo
 
-      - name: Run ansible-lint
-        run: |
-          ansible-lint
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Run ansible-lint
+      - name: Push Docker image
         run: |
-          ansible-lint
+          docker push ghcr.io/s0uf12n8/homelab-ci-demo:latest
