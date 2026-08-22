@@ -62,6 +62,24 @@ Implemented:
 - Deployment and configuration verification
 
 **Phase 2 Status:** ✅ Complete
+
+### ✅ Phase 3 – CI/CD
+
+**Completed:**
+
+- GitHub Actions CI workflow
+- Ansible syntax validation in CI
+- Ansible-lint validation in CI
+- Docker image build in CI
+- Multi-tag Docker images using Git commit SHA
+- GitHub Container Registry (GHCR)
+- ARM64 Docker image builds for node2
+- Automated SSH access from GitHub Actions to node2
+- Ansible-based Docker deployment
+- Deployment using the exact Git commit SHA
+- End-to-end CI/CD verification
+
+**Phase 3 Status:** ✅ Complete
 ---
 
 ## Target Architecture
@@ -106,7 +124,7 @@ homelab-as-code/
 - [x] Phase 0 — Environment setup
 - [x] Phase 1 — Linux hardening with Ansible
 - [x] Phase 2 — Docker & k3s
-- [ ] Phase 3 — GitOps
+- [x] Phase 3 — GitOps
 - [ ] Phase 4 — Observability
 - [ ] Phase 5 — Security monitoring
 - [ ] Phase 6 — CI/CD
