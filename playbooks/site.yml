@@ -6,7 +6,7 @@
   tasks:
 
     - name: Install required packages
-      apt:
+      ansible.builtin.apt:
         name:
           - curl
           - git
@@ -19,13 +19,13 @@
         update_cache: true
 
     - name: Ensure Chrony service is running and enabled
-      systemd:
+      ansible.builtin.systemd:
         name: chrony
         state: started
         enabled: true
 
     - name: Stop and disable systemd-timesyncd
-      systemd:
+      ansible.builtin.systemd:
         name: systemd-timesyncd
         state: stopped
         enabled: false
