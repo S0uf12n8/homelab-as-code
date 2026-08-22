@@ -25,16 +25,22 @@ jobs:
         run: |
           python3 -m pip install --user ansible-lint
 
-      - name: Run ansible-lint
-        run: |
-          ansible-lint
-
+      
       - name: Check Ansible syntax
         run: |
           find playbooks -name "*.yml" -type f -print0 | while IFS= read -r -d '' playbook; do
             echo "Checking: $playbook"
             ansible-playbook "$playbook" --syntax-check || exit 1
           done
+      
       - name: Build Docker image
         run: |
           docker build -t homelab-ci-demo:latest ./docker/ci-demo
+      
+      - name: Run ansible-lint
+        run: |
+          ansible-lint
+      
+      - name: Run ansible-lint
+        run: |
+          ansible-lint
