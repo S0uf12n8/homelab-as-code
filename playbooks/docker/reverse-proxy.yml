@@ -29,7 +29,7 @@
 
     - name: Deploy Nginx configuration
       ansible.builtin.template:
-        src: ../../templates/reverse-proxy.conf.j2
+        src: reverse-proxy.conf.j2
         dest: /opt/reverse-proxy/default.conf
         owner: root
         group: root
