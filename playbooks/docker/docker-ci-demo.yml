@@ -1,0 +1,25 @@
+---
+- name: Deploy CI Demo Container
+  hosts: node2
+  become: true
+
+  vars:
+    image: "ghcr.io/s0uf12n8/homelab-ci-demo:c4b699eb0b108649cce29f1e84324205d894254a"
+    container_name: "ci-demo"
+    host_port: 8082
+    container_port: 80
+
+  tasks:
+    - name: Pull CI demo image
+      community.docker.docker_image:
+        name: "{{ image }}"
+        source: pull
+
+    - name: Deploy CI demo container
+      community.docker.docker_container:
+        name: "{{ container_name }}"
+        image: "{{ image }}"
+        state: started
+        restart_policy: unless-stopped
+        published_ports:
+          - "{{ host_port }}:{{ container_port }}"
