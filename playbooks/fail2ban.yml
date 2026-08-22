@@ -5,7 +5,7 @@
 
   tasks:
     - name: Install fail2ban
-      ansible.builtin.apt: 
+      ansible.builtin.apt:
         name: fail2ban
         state: present
         update_cache: true
