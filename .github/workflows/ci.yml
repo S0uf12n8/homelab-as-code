@@ -42,7 +42,11 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build --platform linux/arm64 -t ghcr.io/s0uf12n8/homelab-ci-demo:latest ./docker/ci-demo
+          docker build \
+            --platform linux/arm64 \
+            -t ghcr.io/s0uf12n8/homelab-ci-demo:latest \
+            -t ghcr.io/s0uf12n8/homelab-ci-demo:${{ github.sha }} \
+            ./docker/ci-demo
 
       - name: Log in to GHCR
         uses: docker/login-action@v3
@@ -54,3 +58,4 @@ jobs:
       - name: Push Docker image
         run: |
           docker push ghcr.io/s0uf12n8/homelab-ci-demo:latest
+          docker push ghcr.io/s0uf12n8/homelab-ci-demo:${{ github.sha }}
