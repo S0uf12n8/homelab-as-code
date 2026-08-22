@@ -35,3 +35,6 @@ jobs:
             echo "Checking: $playbook"
             ansible-playbook "$playbook" --syntax-check || exit 1
           done
+      - name: Build Docker image
+        run: |
+          docker build -t homelab-ci-demo:latest ./docker/ci-demo
