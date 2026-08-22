@@ -59,3 +59,24 @@ jobs:
         run: |
           docker push ghcr.io/s0uf12n8/homelab-ci-demo:latest
           docker push ghcr.io/s0uf12n8/homelab-ci-demo:${{ github.sha }}
+
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H 84.8.220.209 >> ~/.ssh/known_hosts
+
+      - name: Configure Ansible SSH
+        run: |
+          mkdir -p ~/.ansible
+          cat > ~/.ansible/ansible.cfg <<'EOF'
+          [defaults]
+          private_key_file = /home/runner/.ssh/deploy_key
+          host_key_checking = True
+          EOF
+
+      - name: Deploy CI demo
+         run: |
+          ansible-playbook playbooks/docker/docker-ci-demo.yml \
+             -e "image_tag=${{ github.sha }}"
